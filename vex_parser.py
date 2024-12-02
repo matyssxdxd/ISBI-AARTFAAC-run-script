@@ -40,4 +40,11 @@ class VEXParser:
 
 vex = VEXParser()
 vex.parse("I001.vix")
-print(vex.data)
+threads = vex.data["THREADS"]["IrIbThreads#0"]["channel"]
+mappedIdx = [0 for _ in range(len(threads))]
+for i in range(len(threads)):
+	thread = threads[i].split()
+	threadIdx = int(thread[-1])
+	mappedIdx[threadIdx] = i
+
+print(mappedIdx)
