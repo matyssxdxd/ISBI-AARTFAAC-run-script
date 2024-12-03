@@ -1,9 +1,21 @@
-import re
 from datetime import datetime, timedelta
 from collections import defaultdict
 from bitstream import *
 from vex import Vex
+import argparse
 import sys
+import json
+import re
+
+# parser = argparse.ArgumentParser()
+# parser.add_argument("-v", "--vex", help="Observation's VEX file")
+# parser.add_argument("-c", "--control", help="Control file")
+# 
+# args = parser.parse_args()
+# 
+# file = open(args.control, 'r')
+# control = json.load(file) 
+# file.close()
 
 vex = Vex(sys.argv[1])
 if "THREADS" in vex:
@@ -25,7 +37,7 @@ for i in range(len(threads)):
     threadIdx = int(thread[-1])
     mappedIdx[threadIdx] = i
 
-observation = "No0003"
+observation = "No0002"
 date_str = vex["SCHED"][observation]["start"]
 
 years = int(date_str[:4])
@@ -38,11 +50,11 @@ base_date = datetime(years, 1, 1)
 time_delta = timedelta(days=days, hours=hours, minutes=minutes, seconds=seconds)
 final_date = base_date + time_delta
 formatted_date = final_date.strftime("%Y-%m-%d %H:%M:%S")
-print(formatted_date)
 
+# This will not work for ALL of the files, need to think of a better way to retrieve this data
 freq = vex["MODE"][sys.argv[1].split(".")[0]]["FREQ"][0]
-
 sample_rate = str(int(float(vex["FREQ"][freq]["sample_rate"].split()[0]) * 1e+6))
+
 runtime = str(180)
 vdif_1 = str(10)
 vdif_2 = str(10)
