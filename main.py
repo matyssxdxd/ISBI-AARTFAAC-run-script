@@ -21,17 +21,15 @@ import re
 
 vex = Vex(sys.argv[1])
 
-print(vex["MODE"]["aa1"])
- 
-# if "THREADS" in vex:
-#     print("WOOHOO")
-# else:
-# 	BITSTREAMS, THREADS, modes = create_bitstreams_and_threads_block(sys.argv[1])
-# 	print(THREADS[0])
-# 	file = open(sys.argv[1], 'a')
-# 	file.write("*------------------------------------------------------------------------------")
-# 	file.write(THREADS[0])
-# 	file.close()
+if "THREADS" in vex:
+    print("WOOHOO")
+else:
+	BITSTREAMS, THREADS, modes = create_bitstreams_and_threads_block(sys.argv[1])
+	print(THREADS[0])
+	file = open(sys.argv[1], 'a')
+	file.write("*------------------------------------------------------------------------------")
+	file.write(THREADS[0])
+	file.close()
 
 
 # vex = Vex(sys.argv[1])

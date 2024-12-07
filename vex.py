@@ -162,8 +162,10 @@ def p_block_lines(t):
         t[0] = MultiDict()
     else:
         t[0] = t[1]
-        t[0].update(t[2])
+        for key, value in t[2].items():
+            t[0].add(key, value)
         pass
+    print(t[0])
     return
 
 def p_block_line(t):
@@ -175,6 +177,7 @@ def p_block_line(t):
     else:
         t[0][str(t[1])] = t[3]
         pass
+    print(t[0])
     return
 
 def p_value(t):
