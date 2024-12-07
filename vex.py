@@ -26,7 +26,7 @@ import sys
 import ply.lex as lex
 import ply.yacc as yacc
 
-from MultiDict import MultiDict
+from multidict import MultiDict
 
 states = (
     ('literal', 'exclusive'),
@@ -226,5 +226,5 @@ def Vex(file):
 
 if __name__ == "__main__":
     import sys
-    print (Vex(sys.argv[1])["THREADS"])
+    print (Vex(sys.argv[1]))
     sys.exit(0)

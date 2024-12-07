@@ -74,10 +74,9 @@ def get_mode_per_station(vex, modes, stations):
         FREQs = vex['MODE'][mode].getall("FREQ")
         IFs = vex['MODE'][mode].getall("IF")
         BBCs = vex['MODE'][mode].getall("BBC")
-        
         result[mode] = dict()
         for station in stations:
-            
+        
             result[mode][station] = dict()
             for freq in FREQs:
                 for f in range(1, len(freq)):
@@ -103,7 +102,6 @@ def get_DBBC_patching_strings(vex, mode_per_station, modes, stations):
         info = mode_per_station[mode]
         for station in stations:
             result[mode][station] = list()
-            
             for i in range(0, len(vex["FREQ"][info[station]["FREQ"]].getall("chan_def"))):
                 BBC_channel = vex["FREQ"][info[station]["FREQ"]].getall("chan_def")[i][5]
                 string = re.findall('-?\d+\.?\d*', BBC_channel)
@@ -117,9 +115,8 @@ def get_DBBC_patching_strings(vex, mode_per_station, modes, stations):
                         for F in FREQ:
                             if F[0] == FREQ_channel:
                                 result[mode][station].append(F[-1])
-                                
+
             result[mode][station] = [''.join(x) for x in zip(result[mode][station][0::2], result[mode][station][1::2])]
-            
             tmpResults = list()
             for ch in range(0, len(result[mode][station])):
                 tmp = re.findall('-?\d+\.?\d*', result[mode][station][ch])
@@ -133,7 +130,6 @@ def get_DBBC_patching_strings(vex, mode_per_station, modes, stations):
                 tmpResults.append(result[mode][station][ch] + "M")
                     
             result[mode][station] = tmpResults
-            
     return result
 
 def get_DBBC_type_per_stations(modes, stations, DBBC_patching_strings):
