@@ -1,10 +1,8 @@
 # ISBI AARTFAAC run script (WIP)
-___
 ISBI AARTFAAC run scrip is a python script that takes in VEX file and control file as arguments and generates a command
 to run or runs the ISBI AARTFAAC correlator. The code requires [Python3](https://www.python.org/downloads/) and 
 [MultiDict](https://multidict.aio-libs.org/en/stable/) library.
 ## Control file format
-___
 ```json
 {
 "start-time":"0",
@@ -24,7 +22,6 @@ ___
 - **output-path:**: path where correlator output will be saved.
 - **reference-station:** reference station.
 ## Usage
-___
 ```shell
 python3 main.py -v VEX_FILE.vex -c CTRL_FILE.json
 ```
