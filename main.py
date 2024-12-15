@@ -5,6 +5,7 @@ import argparse
 import json
 import sys
 import re
+import subprocess
 
 # TODO: Check if CTRL file is correct (start-time, end-time, file paths, etc.)
 #		Make the code work for ANY vex file.
@@ -109,7 +110,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-v", "--vex", help="Observation's VEX file")
     parser.add_argument("-c", "--control", help="Control file")
-    
+    parser.add_argument('--cmd', action=argparse.BooleanOptionalAction)
+ 
     args = parser.parse_args()
     
     file = open(args.control, 'r')
@@ -125,4 +127,7 @@ if __name__ == "__main__":
     subbands = get_subbands(vex)
     channel_mapping = get_channel_mapping(args.vex)
 
-    print(generate_output_cmd(control, scan_nr, channel_mapping, start_time, runtime, sample_rate, subbands))
+    if args.cmd:
+        print(generate_output_cmd(control, scan_nr, channel_mapping, start_time, runtime, sample_rate, subbands))
+    else:
+        print(subprocess.check_output(generate_output_cmd(control, scan_nr, channel_mapping, start_time, runtime, sample_rate, subbands)))
